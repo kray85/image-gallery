@@ -1,12 +1,13 @@
 import "./App.css";
 
 import React from "react";
+import Header  from "./components";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Image Gallery</h1>
-    </div>
+    <>
+      <Header />
+    </>
   );
 };
 
