@@ -1,13 +1,13 @@
 import "./App.css";
 
 import React, { useState } from "react";
-import { Header, Search } from "./components";
+import { Header, ImageGallery, Search } from "./components";
 
 const UNSPLASH_KEY = import.meta.env.VITE_UNSPLASH_KEY;
 
 const App = () => {
   const [word, setWord] = useState("");
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState([]);
 
   console.log(images);
 
@@ -19,18 +19,21 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        setImages([data, ...images]);
+        setImages([{ ...data, title: word }, ...images]);
       })
       .catch((error) => {
         console.log(error);
       });
-      setWord("");
+    setWord("");
   };
 
   return (
     <>
       <Header title="Images Gallery" />
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
+      <div className="min-h-screen bg-gray-100">
+        <ImageGallery images={images} />
+      </div>
     </>
   );
 };
