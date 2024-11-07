@@ -1,14 +1,12 @@
 import React from "react";
 
-const ImageCard = ({ image }) => {
-
-
-  console.log(image)
+const ImageCard = ({ image, deleteImage }) => {
+  console.log(image);
   return (
     <>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg m-4">
+      <div className="max-w-sm rounded overflow-hidden shadow-lg m-8">
         <img
-          className="w-full h-[60%] object-cover"
+          className="w-full h-52 object-cover"
           src={image.urls?.small}
           alt={image.alt_description}
           height="h-64"
@@ -22,7 +20,8 @@ const ImageCard = ({ image }) => {
         <div className="px-6 py-6">
           <button
             type="button"
-            className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          onClick={() => deleteImage(image.id)}
           >
             Delete
           </button>

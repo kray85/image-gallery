@@ -9,8 +9,6 @@ const App = () => {
   const [word, setWord] = useState("");
   const [images, setImages] = useState([]);
 
-  console.log(images);
-
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     console.log(word);
@@ -27,12 +25,16 @@ const App = () => {
     setWord("");
   };
 
+  const handleDeleteImage = (id) => {
+    setImages(images.filter((image) => image.id !== id));
+  };
+
   return (
     <>
       <Header title="Images Gallery" />
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
       <div className="min-h-screen bg-gray-100">
-        <ImageGallery images={images} />
+        <ImageGallery images={images} deleteImage={handleDeleteImage} />
       </div>
     </>
   );
