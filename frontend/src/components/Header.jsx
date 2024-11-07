@@ -1,8 +1,6 @@
 import React from "react";
 
-const navbarStyle = {
-  backgroundColor: "#f9fafb",
-};
+
 
 const Header = ({ title }) => {
   return (
@@ -11,7 +9,7 @@ const Header = ({ title }) => {
         <div className="mx-auto max-w-7xl px-3 lg:px-3">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
-              {title}
+             {title}
             </h2>
           </div>
         </div>
