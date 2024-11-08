@@ -32,7 +32,7 @@ const App = () => {
     <>
       <Header title="Images Gallery" />
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen">
         <ImageGallery images={images} deleteImage={handleDeleteImage} />
       </div>
     </>
