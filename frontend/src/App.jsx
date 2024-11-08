@@ -3,7 +3,7 @@ import "./App.css";
 import React, { useState } from "react";
 import { Header, ImageGallery, Search } from "./components";
 
-const UNSPLASH_KEY = import.meta.env.VITE_UNSPLASH_KEY;
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5000"
 
 const App = () => {
   const [word, setWord] = useState("");
@@ -11,9 +11,8 @@ const App = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log(word);
     fetch(
-      `https://api.unsplash.com/photos/random?query=${word}&client_id=${UNSPLASH_KEY}`
+      `${API_URL}/new-image?query=${word}`
     )
       .then((response) => response.json())
       .then((data) => {
