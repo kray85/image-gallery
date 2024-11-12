@@ -2,6 +2,7 @@ import os
 import requests
 from flask import Flask, request
 from flask_cors import CORS
+from mongo_client import insert_test_document
 
 from dotenv import load_dotenv
 
