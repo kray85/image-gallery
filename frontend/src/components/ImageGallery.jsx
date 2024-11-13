@@ -25,7 +25,7 @@ const ImageGallery = ({ images, deleteImage, saveImage }) => {
           </div>
         </div>
       ) : (
-        <div className="mx-auto max-w-7xl p-4 mt-4">
+        <div className="mx-auto max-w-[1380px] p-4 mt-4">
           <div className="flex flex-wrap justify-center">
             {images.map((image, i) => (
               <ImageCard key={i} image={image} deleteImage={deleteImage} saveImage={saveImage}/>
