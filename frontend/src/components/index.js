@@ -3,3 +3,4 @@ export { default as Navbar } from "./Navbar";
 export { default as Search } from "./Search";
 export { default as ImageCard } from "./ImageCard";
 export { default as ImageGallery } from "./ImageGallery";
+export { default as Spinner } from "./Spinner";

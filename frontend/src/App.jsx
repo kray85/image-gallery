@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { useState, useEffect } from "react";
-import { Header, ImageGallery, Search } from "./components";
+import { Header, ImageGallery, Search, Spinner } from "./components";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5000";
@@ -9,12 +9,14 @@ const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5000";
 const App = () => {
   const [word, setWord] = useState("");
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Fetch saved images for page load
   const getSavedImages = async () => {
     try {
       const res = await axios.get(`${API_URL}/images`);
       setImages(res.data || []);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -58,10 +60,7 @@ const App = () => {
   const handleDeleteImage = async (id) => {
     const imageToDelete = images.find((image) => image.id === id);
     try {
-      const res = await axios.delete(
-        `${API_URL}/images/${id}`,
-        imageToDelete
-      );
+      const res = await axios.delete(`${API_URL}/images/${id}`, imageToDelete);
       getSavedImages(); // Refresh the saved images
       console.log(res.data);
     } catch (error) {
@@ -72,14 +71,24 @@ const App = () => {
   return (
     <>
       <Header title="Images Gallery" />
-      <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
-      <div className="min-h-screen">
-        <ImageGallery
-          images={images}
-          deleteImage={handleDeleteImage}
-          saveImage={handleSaveImage}
-        />
-      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <Search
+            word={word}
+            setWord={setWord}
+            handleSubmit={handleSearchSubmit}
+          />
+          <div className="min-h-screen">
+            <ImageGallery
+              images={images}
+              deleteImage={handleDeleteImage}
+              saveImage={handleSaveImage}
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };
