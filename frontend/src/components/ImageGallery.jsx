@@ -1,7 +1,7 @@
-import React from "react";
+import PropTypes from 'prop-types';
 import { ImageCard } from "../components";
 
-const ImageGallery = ({ images, deleteImage }) => {
+const ImageGallery = ({ images, deleteImage, saveImage }) => {
   return (
     <>
       {images.length === 0 ? (
@@ -28,13 +28,18 @@ const ImageGallery = ({ images, deleteImage }) => {
         <div className="mx-auto max-w-7xl p-4 mt-4">
           <div className="flex flex-wrap justify-center">
             {images.map((image, i) => (
-              <ImageCard key={i} image={image} deleteImage={deleteImage} />
+              <ImageCard key={i} image={image} deleteImage={deleteImage} saveImage={saveImage}/>
             ))}
           </div>
         </div>
       )}
     </>
   );
+};
+ImageGallery.propTypes = {
+  images: PropTypes.array.isRequired,
+  deleteImage: PropTypes.func.isRequired,
+  saveImage: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;

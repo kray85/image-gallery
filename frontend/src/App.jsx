@@ -37,8 +37,36 @@ const App = () => {
     setWord("");
   };
 
-  const handleDeleteImage = (id) => {
-    setImages(images.filter((image) => image.id !== id));
+  const handleSaveImage = async (id) => {
+    const imageToSave = images.find((image) => image.id === id);
+    imageToSave.saved = true;
+
+    try {
+      const res = await axios.post(`${API_URL}/images`, imageToSave);
+      if (res.data?.inserted_id) {
+        setImages((prevImages) =>
+          prevImages.map((image) =>
+            image.id === id ? { ...image, saved: true } : image
+          )
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteImage = async (id) => {
+    const imageToDelete = images.find((image) => image.id === id);
+    try {
+      const res = await axios.delete(
+        `${API_URL}/image-delete/${id}`,
+        imageToDelete
+      );
+      getSavedImages(); // Refresh the saved images
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -46,7 +74,11 @@ const App = () => {
       <Header title="Images Gallery" />
       <Search word={word} setWord={setWord} handleSubmit={handleSearchSubmit} />
       <div className="min-h-screen">
-        <ImageGallery images={images} deleteImage={handleDeleteImage} />
+        <ImageGallery
+          images={images}
+          deleteImage={handleDeleteImage}
+          saveImage={handleSaveImage}
+        />
       </div>
     </>
   );
