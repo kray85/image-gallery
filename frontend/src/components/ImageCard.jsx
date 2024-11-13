@@ -13,7 +13,7 @@ const ImageCard = ({ image, deleteImage }) => {
         />
         <div className="px-6 py-6">
           <div className="font-bold text-xl mb-2">
-            {image.title.toUpperCase()}
+            {image.title?.toUpperCase()}
           </div>
           <p className="text-gray-700 text-base">{image.alt_description}</p>
         </div>
