@@ -59,7 +59,7 @@ const App = () => {
     const imageToDelete = images.find((image) => image.id === id);
     try {
       const res = await axios.delete(
-        `${API_URL}/image-delete/${id}`,
+        `${API_URL}/images/${id}`,
         imageToDelete
       );
       getSavedImages(); // Refresh the saved images
