@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Header, ImageGallery, Search } from "./components";
 import axios from "axios";
 
@@ -10,15 +10,17 @@ const App = () => {
   const [word, setWord] = useState("");
   const [images, setImages] = useState([]);
 
+  // Fetch saved images for page load
   const getSavedImages = async () => {
     try {
       const res = await axios.get(`${API_URL}/images`);
       setImages(res.data || []);
     } catch (error) {
       console.log(error);
-    }    
-  }
+    }
+  };
 
+  // Load saved images on page load
   useEffect(() => {
     getSavedImages();
   }, []);
